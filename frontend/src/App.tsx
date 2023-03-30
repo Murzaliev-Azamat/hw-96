@@ -33,31 +33,7 @@ function App() {
                 style={{ color: 'white' }}
                 to={'/add-artist'}
               >
-                Add artist
-              </Button>
-            </Grid>
-            <Grid item xs={2}>
-              <Button
-                component={NavLink}
-                variant="contained"
-                size="small"
-                disableElevation
-                style={{ color: 'white' }}
-                to={'/add-album'}
-              >
-                Add album
-              </Button>
-            </Grid>
-            <Grid item xs={2}>
-              <Button
-                component={NavLink}
-                variant="contained"
-                size="small"
-                disableElevation
-                style={{ color: 'white' }}
-                to={'/add-track'}
-              >
-                Add track
+                Add Cocktail
               </Button>
             </Grid>
           </Grid>

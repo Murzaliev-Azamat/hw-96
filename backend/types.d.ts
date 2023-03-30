@@ -7,11 +7,11 @@ export interface Artist {
 
 export type ArtistWithoutId = Omit<Artist, "id">;
 
-export interface AlbumMutation {
-  artist: string;
+export interface CocktailMutation {
+  user: string;
   name: string;
+  recipe: string;
   image: string | null;
-  year: number;
 }
 
 export interface TrackMutation {

@@ -6,11 +6,22 @@ export interface Artist {
   isPublished: boolean;
 }
 
-export interface ArtistApi {
+export interface CocktailApi {
   name: string;
   image: File | null;
-  info: string;
+  recipe: string;
+  [string]: string;
+  ingredients: {
+    name: string;
+    amount: string;
+  }[];
 }
+
+// export interface IngredientsApi {
+//   [string]: string;
+//   // ingredientName: string;
+//   // amount: string;
+// }
 
 export interface Album {
   _id: string;

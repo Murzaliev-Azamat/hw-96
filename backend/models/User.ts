@@ -51,7 +51,10 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     required: true,
   },
   googleId: String,
-  image: String,
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
 UserSchema.pre("save", async function (next) {
