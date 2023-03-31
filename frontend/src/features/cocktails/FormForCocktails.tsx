@@ -71,10 +71,14 @@ const FormForCocktails = () => {
     }
   };
 
+  const removeInputs = (id: number) => {
+    setIngredientsFields((prev) => prev.splice(id, 1));
+  };
+
   const addIngredientField = (index: number) => {
     const newIngredientField = (
-      <Grid key={Date.now()} container justifyContent="space-between">
-        <Grid item sx={{ width: '75%', mb: 1 }}>
+      <Grid key={Date.now()} container justifyContent="space-between" alignItems="center" sx={{ mb: 1 }}>
+        <Grid item sx={{ width: '65%' }}>
           <TextField
             id="name"
             label="Ingredient Name"
@@ -93,6 +97,11 @@ const FormForCocktails = () => {
             name="amount"
             required
           />
+        </Grid>
+        <Grid item>
+          <Button onClick={() => removeInputs(ingredientsFields.length)} color="primary" variant="contained">
+            Delete
+          </Button>
         </Grid>
       </Grid>
     );
