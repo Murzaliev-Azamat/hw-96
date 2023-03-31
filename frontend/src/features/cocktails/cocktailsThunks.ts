@@ -25,18 +25,6 @@ export const fetchOneCocktail = createAsyncThunk<Cocktail, string>('cocktails/fe
 export const addCocktail = createAsyncThunk<void, CocktailApi>('cocktails/addCocktail', async (cocktail) => {
   const formData = new FormData();
 
-  // const keys = Object.keys(cocktail) as (keyof CocktailApi)[];
-  // keys.forEach((key) => {
-  //   const value = cocktail[key];
-  //
-  //   if (value !== null) {
-  //     if (Array.isArray(value) && key === 'ingredients') {
-  //       formData.append('ingredients', JSON.stringify(value));
-  //     } else {
-  //       formData.append(key, value);
-  //     }
-  //   }
-
   Object.entries(cocktail).forEach(([key, value]) => {
     if (value !== null) {
       if (Array.isArray(value) && key === 'ingredients') {

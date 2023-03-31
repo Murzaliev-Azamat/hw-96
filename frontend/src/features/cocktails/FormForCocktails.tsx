@@ -3,12 +3,11 @@ import { Button, Grid, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import FileInput from '../../components/UI/FileInput/FileInput';
 import { CocktailApi } from '../../../types';
-import { useNavigate } from 'react-router-dom';
 import { addCocktail, fetchCocktails } from './cocktailsThunks';
 import { selectAddCocktailLoading } from './cocktailsSlice';
+import { enqueueSnackbar, SnackbarProvider } from 'notistack';
 
 const FormForCocktails = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const addCocktailLoading = useAppSelector(selectAddCocktailLoading);
   const [ingredientsFields, setIngredientsFields] = useState<JSX.Element[]>([]);
@@ -31,8 +30,9 @@ const FormForCocktails = () => {
       }),
     );
     setState({ name: '', recipe: '', image: null, ingredients: [] });
+    setIngredientsFields([]);
     await dispatch(fetchCocktails());
-    navigate('/');
+    enqueueSnackbar('Спасибо! Ваш коктейль находится на рассмотрении модератора');
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,6 +108,13 @@ const FormForCocktails = () => {
 
   return (
     <form autoComplete="off" onSubmit={submitFormHandler}>
+      <SnackbarProvider
+        variant="success"
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      />
       <Grid item container justifyContent="space-between" alignItems="center" xs sx={{ mb: 1 }}>
         <TextField
           sx={{ width: '100%' }}
@@ -138,6 +145,7 @@ const FormForCocktails = () => {
             value={state.recipe}
             onChange={inputChangeHandler}
             name="recipe"
+            required
           />
         </Grid>
 
