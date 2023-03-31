@@ -9,8 +9,6 @@ const OneCocktail = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
   const cocktail = useAppSelector(selectCocktail);
-  // const fetchAllCocktailsLoading = useAppSelector(selectFetchAllCocktailsLoading);
-  // const user = useAppSelector(selectUser);
 
   useEffect(() => {
     if (params.id) {

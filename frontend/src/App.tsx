@@ -10,6 +10,7 @@ import { selectUser } from './features/users/usersSlise';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import FormForCocktails from './features/cocktails/FormForCocktails';
 import OneCocktail from './features/cocktails/OneCocktail';
+import MyCocktails from './features/cocktails/MyCocktails';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -32,6 +33,18 @@ function App() {
                 Add Cocktail
               </Button>
             </Grid>
+            <Grid item xs={2}>
+              <Button
+                component={NavLink}
+                variant="contained"
+                size="small"
+                disableElevation
+                style={{ color: 'white' }}
+                to={'/my-cocktails'}
+              >
+                My cocktails
+              </Button>
+            </Grid>
           </Grid>
         )}
         <Routes>
@@ -44,11 +57,15 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/my-cocktails"
+            element={
+              <ProtectedRoute isAllowed={user !== null}>
+                <MyCocktails />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/cocktails/:id" element={<OneCocktail />} />
-          {/*<Route path="/add-album" element={<FormForAlbums />} />*/}
-          {/*<Route path="/tracks/:id" element={<Tracks />} />*/}
-          {/*<Route path="/add-track" element={<FormForTracks />} />*/}
-          {/*<Route path="/tracks_history" element={<TracksHistory />} />*/}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<span>Такой страницы не существует</span>} />

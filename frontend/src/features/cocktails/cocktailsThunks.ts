@@ -2,7 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
 import { Cocktail, CocktailApi } from '../../../types';
 
-export const fetchCocktails = createAsyncThunk<Cocktail[]>('cocktails/fetchAll', async () => {
+export const fetchCocktails = createAsyncThunk<Cocktail[], string | undefined>('cocktails/fetchAll', async (id) => {
+  if (id) {
+    const cocktailsResponse = await axiosApi.get<Cocktail[]>('/cocktails?user=' + id);
+    return cocktailsResponse.data;
+  }
   const cocktailsResponse = await axiosApi.get<Cocktail[]>('/cocktails');
   return cocktailsResponse.data;
 });

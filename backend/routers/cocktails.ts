@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import { imagesUpload } from "../multer";
-import Album from "../models/Album";
 import { CocktailMutation } from "../types";
 import auth, { RequestWithUser } from "../middleware/auth";
 import permit from "../middleware/permit";
