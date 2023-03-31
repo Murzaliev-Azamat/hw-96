@@ -3,6 +3,11 @@ import User from "./User";
 
 const Schema = mongoose.Schema;
 
+const IngredientSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  amount: { type: String, required: true },
+});
+
 const CocktailSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -12,6 +17,10 @@ const CocktailSchema = new Schema({
       validator: async (value: Types.ObjectId) => User.findById(value),
       message: "User does not exist",
     },
+  },
+  ingredients: {
+    type: [IngredientSchema],
+    required: true,
   },
   name: {
     type: String,

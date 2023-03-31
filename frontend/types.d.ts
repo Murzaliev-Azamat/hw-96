@@ -1,100 +1,22 @@
-export interface Artist {
+export interface Cocktail {
   _id: string;
   name: string;
   image: string;
-  info: string;
+  recipe: string;
+  ingredients: Ingredient[];
   isPublished: boolean;
+}
+
+export interface Ingredient {
+  name: string;
+  amount: string;
 }
 
 export interface CocktailApi {
   name: string;
   image: File | null;
   recipe: string;
-  [string]: string;
-  ingredients: {
-    name: string;
-    amount: string;
-  }[];
-}
-
-// export interface IngredientsApi {
-//   [string]: string;
-//   // ingredientName: string;
-//   // amount: string;
-// }
-
-export interface Album {
-  _id: string;
-  artist: {
-    _id: string;
-    name: string;
-    image: string;
-    info: string;
-  };
-  name: string;
-  year: string;
-  image: string;
-  isPublished: boolean;
-}
-
-export interface AlbumApi {
-  artist: string;
-  name: string;
-  year: string;
-  image: File | null;
-}
-
-export interface Track {
-  _id: string;
-  album: {
-    _id: string;
-    artist: {
-      _id: string;
-      name: string;
-      image: string;
-      info: string;
-    };
-    name: string;
-    year: string;
-    image: string;
-  };
-  name: string;
-  time: string;
-  trackNumber: number;
-  linkToYoutube?: string;
-  isPublished: boolean;
-}
-
-export interface TrackApi {
-  album: string;
-  name: string;
-  time: string;
-  trackNumber: string;
-  linkToYoutube?: string;
-}
-
-export interface TrackHistory {
-  _id: string;
-  track: {
-    _id: string;
-    album: {
-      _id: string;
-      artist: {
-        _id: string;
-        name: string;
-        info: string;
-        image: string;
-      };
-      image: string;
-      name: string;
-      year: number;
-    };
-    name: string;
-    time: string;
-    trackNumber: number;
-  };
-  user: string;
-  datetime: string;
+  ingredients: Ingredient[];
 }
 
 export interface RegisterMutation {

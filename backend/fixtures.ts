@@ -193,6 +193,7 @@ const run = async () => {
       password: "12345",
       displayName: "Aza",
       token: crypto.randomUUID(),
+
     },
     {
       username: "Adilet",

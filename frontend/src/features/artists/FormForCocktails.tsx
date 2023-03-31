@@ -4,13 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import FileInput from '../../components/UI/FileInput/FileInput';
 import { CocktailApi } from '../../../types';
 import { useNavigate } from 'react-router-dom';
-import { addArtist, fetchArtists } from './artistsThunks';
-import { selectAddArtistLoading } from './artistsSlice';
+import { addCocktail, fetchCocktails } from './cocktailsThunks';
+import { selectAddCocktailLoading } from './cocktailsSlice';
 
-const FormForArtists = () => {
+const FormForCocktails = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const addArtistLoading = useAppSelector(selectAddArtistLoading);
+  const addCocktailLoading = useAppSelector(selectAddCocktailLoading);
   const [ingredientsFields, setIngredientsFields] = useState<JSX.Element[]>([]);
 
   const [state, setState] = useState<CocktailApi>({
@@ -23,7 +23,7 @@ const FormForArtists = () => {
   const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     await dispatch(
-      addArtist({
+      addCocktail({
         name: state.name,
         recipe: state.recipe,
         image: state.image,
@@ -31,7 +31,7 @@ const FormForArtists = () => {
       }),
     );
     setState({ name: '', recipe: '', image: null, ingredients: [] });
-    await dispatch(fetchArtists());
+    await dispatch(fetchCocktails());
     navigate('/');
   };
 
@@ -55,8 +55,6 @@ const FormForArtists = () => {
       return { ...prevState, ingredients: newIngredients };
     });
   };
-
-  console.log(state);
 
   const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
@@ -104,7 +102,7 @@ const FormForArtists = () => {
 
   let disabled = false;
 
-  if (addArtistLoading) {
+  if (addCocktailLoading) {
     disabled = true;
   }
 
@@ -149,10 +147,10 @@ const FormForArtists = () => {
       </Grid>
 
       <Button disabled={disabled} type="submit" color="primary" variant="contained">
-        Add artist
+        Add cocktail
       </Button>
     </form>
   );
 };
 
-export default FormForArtists;
+export default FormForCocktails;

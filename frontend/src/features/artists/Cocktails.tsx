@@ -1,59 +1,67 @@
 import React, { useEffect } from 'react';
-import { deleteArtist, fetchArtists, publishArtist } from './artistsThunks';
+import { deleteCocktail, fetchCocktails, publishCocktail } from './cocktailsThunks';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectArtists, selectFetchAllArtistsLoading } from './artistsSlice';
+import { selectCocktails, selectFetchAllCocktailsLoading } from './cocktailsSlice';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { apiUrl } from '../../constants';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { selectUser } from '../users/usersSlise';
 
-const Artists = () => {
+const Cocktails = () => {
   const dispatch = useAppDispatch();
-  const artists = useAppSelector(selectArtists);
-  const fetchAllArtistsLoading = useAppSelector(selectFetchAllArtistsLoading);
+  const cocktails = useAppSelector(selectCocktails);
+  const fetchAllCocktailsLoading = useAppSelector(selectFetchAllCocktailsLoading);
   const user = useAppSelector(selectUser);
 
   useEffect(() => {
-    dispatch(fetchArtists());
+    dispatch(fetchCocktails());
   }, [dispatch]);
 
-  const removeArtist = async (id: string) => {
-    await dispatch(deleteArtist(id));
-    await dispatch(fetchArtists());
+  const removeCocktail = async (id: string) => {
+    await dispatch(deleteCocktail(id));
+    await dispatch(fetchCocktails());
   };
 
   const publish = async (id: string) => {
-    await dispatch(publishArtist(id));
-    await dispatch(fetchArtists());
+    await dispatch(publishCocktail(id));
+    await dispatch(fetchCocktails());
   };
 
   let info = null;
 
-  if (fetchAllArtistsLoading) {
+  if (fetchAllCocktailsLoading) {
     info = <Spinner />;
   } else {
     info = (
       <>
-        {artists.map((artist) => {
-          if ((!artist.isPublished && user && user.role !== 'admin') || (!artist.isPublished && !user)) {
+        {cocktails.map((cocktail) => {
+          if ((!cocktail.isPublished && user && user.role !== 'admin') || (!cocktail.isPublished && !user)) {
             return;
           }
           return (
             <div
-              key={artist._id}
+              key={cocktail._id}
               style={{ display: 'flex', alignItems: 'center', marginBottom: '15px', position: 'relative' }}
             >
-              <img src={apiUrl + '/' + artist.image} style={{ marginRight: '10px', width: '200px' }} alt="image"></img>
-              <Link to={'/albums/' + artist._id} style={{ marginRight: '10px' }}>
-                {artist.name}
+              <img
+                src={apiUrl + '/' + cocktail.image}
+                style={{ marginRight: '10px', width: '200px' }}
+                alt="image"
+              ></img>
+              <Link to={'/albums/' + cocktail._id} style={{ marginRight: '10px' }}>
+                {cocktail.name}
               </Link>
               {user && user.role === 'admin' && (
-                <Button onClick={() => removeArtist(artist._id)} variant="contained" style={{ marginRight: '10px' }}>
+                <Button
+                  onClick={() => removeCocktail(cocktail._id)}
+                  variant="contained"
+                  style={{ marginRight: '10px' }}
+                >
                   Delete
                 </Button>
               )}
-              {user && user.role === 'admin' && !artist.isPublished && (
+              {user && user.role === 'admin' && !cocktail.isPublished && (
                 <>
                   <div
                     style={{
@@ -67,7 +75,7 @@ const Artists = () => {
                   >
                     <p style={{ color: 'red' }}>Неопубликовано</p>
                   </div>
-                  <Button onClick={() => publish(artist._id)} variant="contained" color="success">
+                  <Button onClick={() => publish(cocktail._id)} variant="contained" color="success">
                     Опубликовать
                   </Button>
                 </>
@@ -82,4 +90,4 @@ const Artists = () => {
   return <div>{info}</div>;
 };
 
-export default Artists;
+export default Cocktails;
