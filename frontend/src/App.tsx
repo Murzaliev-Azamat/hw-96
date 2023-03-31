@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button, Container, Grid } from '@mui/material';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import Cocktails from './features/artists/Cocktails';
+import Cocktails from './features/cocktails/Cocktails';
 import AppToolBar from './components/UI/AppToolBar/AppToolBar';
 import Register from './features/users/Register';
 import Login from './features/users/Login';
 import { useAppSelector } from './app/hooks';
 import { selectUser } from './features/users/usersSlise';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import FormForCocktails from './features/artists/FormForCocktails';
+import FormForCocktails from './features/cocktails/FormForCocktails';
+import OneCocktail from './features/cocktails/OneCocktail';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -26,7 +27,7 @@ function App() {
                 size="small"
                 disableElevation
                 style={{ color: 'white' }}
-                to={'/add-artist'}
+                to={'/add-cocktail'}
               >
                 Add Cocktail
               </Button>
@@ -36,14 +37,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Cocktails />} />
           <Route
-            path="/add-artist"
+            path="/add-cocktail"
             element={
               <ProtectedRoute isAllowed={(user && user.role === 'admin') || (user && user.role === 'user')}>
                 <FormForCocktails />
               </ProtectedRoute>
             }
           />
-          {/*<Route path="/albums/:id" element={<Albums />} />*/}
+          <Route path="/cocktails/:id" element={<OneCocktail />} />
           {/*<Route path="/add-album" element={<FormForAlbums />} />*/}
           {/*<Route path="/tracks/:id" element={<Tracks />} />*/}
           {/*<Route path="/add-track" element={<FormForTracks />} />*/}

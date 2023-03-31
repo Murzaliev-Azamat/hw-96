@@ -3,8 +3,14 @@ export interface Cocktail {
   name: string;
   image: string;
   recipe: string;
-  ingredients: Ingredient[];
+  ingredients: IngredientPayload[];
   isPublished: boolean;
+}
+
+export interface IngredientPayload {
+  _id: string;
+  name: string;
+  amount: string;
 }
 
 export interface Ingredient {

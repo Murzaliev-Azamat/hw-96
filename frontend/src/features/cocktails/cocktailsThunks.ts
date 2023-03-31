@@ -7,6 +7,17 @@ export const fetchCocktails = createAsyncThunk<Cocktail[]>('cocktails/fetchAll',
   return cocktailsResponse.data;
 });
 
+export const fetchOneCocktail = createAsyncThunk<Cocktail, string>('cocktails/fetchOne', async (id) => {
+  const cocktailResponse = await axiosApi.get<Cocktail | null>('cocktails/' + id);
+  const cocktail = cocktailResponse.data;
+
+  if (cocktail === null) {
+    throw new Error('Not found!');
+  }
+
+  return cocktail;
+});
+
 export const addCocktail = createAsyncThunk<void, CocktailApi>('cocktails/addCocktail', async (cocktail) => {
   const formData = new FormData();
 

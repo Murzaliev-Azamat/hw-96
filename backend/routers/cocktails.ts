@@ -39,7 +39,6 @@ cocktailsRouter.post(
   async (req, res, next) => {
     const user = (req as RequestWithUser).user;
     const ingredients = JSON.parse(req.body.ingredients);
-    console.log(req.body);
     const cocktailData: CocktailMutation = {
       user: user._id.toString(),
       name: req.body.name,
@@ -49,6 +48,8 @@ cocktailsRouter.post(
     };
 
     const cocktail = new Cocktail(cocktailData);
+
+    console.log(cocktail);
 
     try {
       await cocktail.save();

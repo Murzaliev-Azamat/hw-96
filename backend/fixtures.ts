@@ -13,7 +13,7 @@ const run = async () => {
 
   try {
     await db.dropCollection("albums");
-    await db.dropCollection("artists");
+    await db.dropCollection("cocktails");
     await db.dropCollection("trackhistories");
     await db.dropCollection("tracks");
     await db.dropCollection("users");

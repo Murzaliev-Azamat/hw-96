@@ -49,7 +49,7 @@ const Cocktails = () => {
                 style={{ marginRight: '10px', width: '200px' }}
                 alt="image"
               ></img>
-              <Link to={'/albums/' + cocktail._id} style={{ marginRight: '10px' }}>
+              <Link to={'/cocktails/' + cocktail._id} style={{ marginRight: '10px' }}>
                 {cocktail.name}
               </Link>
               {user && user.role === 'admin' && (

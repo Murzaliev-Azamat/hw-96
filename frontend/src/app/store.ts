@@ -3,7 +3,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 import { usersReducer } from '../features/users/usersSlise';
-import { cocktailsReducer } from '../features/artists/cocktailsSlice';
+import { cocktailsReducer } from '../features/cocktails/cocktailsSlice';
 
 const usersPersistConfig = {
   key: 'shop:users',
